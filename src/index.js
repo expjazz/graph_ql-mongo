@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const Query = require('./resolvers/Query');
 const typeDefs = require('./schema');
+const Mutation = require('./resolvers/Mutation');
 
 const app = express();
 mongoose.connect('mongodb://localhost/netflixClone', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -13,12 +14,9 @@ const movieSchema = new mongoose.Schema({
 
 const Movie = mongoose.model('Movie', movieSchema);
 
-const avengers = new Movie({ name: 'The Avengers  ' });
-avengers.save((err) => {
-  if (err) return console.error(err);
-});
 const resolvers = {
   Query,
+  Mutation,
 };
 
 const server = new ApolloServer({
